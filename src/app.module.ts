@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
+import { ReviewsModule } from './reviews/reviews.module';
+import { Review } from './reviews/reviews.model';
 
 
 @Module({
@@ -16,7 +18,15 @@ import { User } from './users/users.model';
       entities: [User],
       synchronize: true,
     }),
+    TypeOrmModule.forRoot({
+      name: 'reviewsConnection',
+      type: 'sqlite',
+      database:'reviews.db',
+      entities: [Review],
+      synchronize: true,
+    }),
     UsersModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
